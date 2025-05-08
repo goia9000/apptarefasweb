@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tarefas', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
+            $table->string('tarefa');
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
