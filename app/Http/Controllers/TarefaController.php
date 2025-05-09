@@ -35,12 +35,28 @@ class TarefaController extends Controller
 
     public function update(Request $request, Tarefa $tarefa)
     {
-        //
+        $request->validate([
+            'tarefa' => 'required',
+            'status' => 'required'
+        ]);
+
+        $tarefa->update([
+            'tarefa' => $request->tarefa,
+            'status' => $request->status
+        ]);
+
+        return redirect()->route('home.index');
     }
 
     public function destroy(Tarefa $tarefa)
     {
         $tarefa->delete();
         return redirect()->route('home.index');
+    }
+    public function statusUpdate (Tarefa $tarefa){
+        $tarefa->status = !$tarefa->status;
+        $tarefa->save();
+
+        return response()->json('ok');
     }
 }
